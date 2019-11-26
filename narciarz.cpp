@@ -5,6 +5,7 @@ int main()
 {
 
 cout<<"narciarz farciarz wita was serdecznie moje drogie dzieci"<<endl;
+  cout<<"lecz sie"<<endl;
 
 return 0;
 }
