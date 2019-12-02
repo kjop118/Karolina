@@ -48,7 +48,7 @@ int main()
 
 	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
 	//goto:
-	cout <<"Witamy w systemie obslugi osrodka narciarskiego!!!" << endl;
+	cout <<"Witamy w systemie obslugi osrodka narciarskiego!!!"<< endl;
 	cout <<"*************** Wybierz kim jesteś ***************"<< endl;
 	cout <<"****************** 1. Kierownik ******************"<< endl;
 	cout <<"******************** 2. Kasjer *******************"<< endl;
@@ -74,7 +74,7 @@ int main()
 					break;
 				case 'nie':
 					//mozna sie cofnąc do wyboru osoby
-					//goto:
+					//np. goto:
 					break;
 				default:
 					break;
@@ -106,13 +106,31 @@ int main()
 
 		case 3:
 			//tworzymy obiekt obsluga wypozyczalni
+			cout<<"***************** Wybierz opcje ******************"<<endl;
+			cout<<"************ 1. Wypozyczenie sprzetu *************"<<endl;
+			cout<<"******** 2. Stan sprzetu w wypozyczalnii *********"<<endl;
+			
+			int opcja4;
+			cin>>opcja4;
+			switch(opcja4)
+			{
+				case 1:
+					//funkcja zwiazana z wypozyczeniem sprzetu
+					break;
+				case 2:
+					//funkcja zwiazana z wyswietleniem stanu sprzetu
+					break;
+				deafult:
+					break;
+			}
+			
 			break;
 		case 4:
 			//tworzymy obiekt narciarz
 		
     		int opcja5;
 			cout<<"*************** OSRODEK NARCIARSKI ***************"<<endl;
-			cout<<"***************** WYBIERZ OPCJE ******************"<<endl;
+			cout<<"***************** Wybierz opcje ******************"<<endl;
 			cout<<"**************** 1. Rejestracja ******************"<<endl;
 			cout<<"***************** 2. Kup Karnet ******************"<<endl;
 			cout<<"*************** 3. Przedluz karnet ***************"<<endl;
