@@ -2,16 +2,22 @@
 #include <string>
 using namespace std;
 
-/*
-class Narciarz_farciarz{
-public:
-string imie;
-string nazwisko;
-string data_ur;
-string e_mail;
+
+class Narciarz_farciarz
+{
+
+	protected:
+
+	string imie;
+	string nazwisko;
+	string data_ur;
+	string e_mail;
+	int ID;
+	
+	
 
 };
-
+/*
 class Karnet{
     public:
     string data_rozp_karnetu;
