@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <cstdlib>
+#include <algorithm>
 using namespace std;
 
 
@@ -12,11 +15,53 @@ class Narciarz_farciarz
 	string nazwisko;
 	string data_ur;
 	string e_mail;
-	int ID;
 	
+	
+};
+
+class Logowanie{
+	void wprowadz_dane(string e_mail, string imie, string nazwisko)
+	{
+		cout<<"Podaj e-mail: "; cin>>e_mail;
+		cout<<"Podaj imie: "; cin>>imie ;
+		cout<<"Podaj nazwisko: "; cin>>nazwisko ;
+	}
+	
+	void sprawdzanie_BD(string e_mail)
+	{
+	//otwarcie pliku, sprawdzanie maila
+		fstream plik;
+		plik.open("BD_narciarzy.txt",ios::in);
+		if(plik.good()==false)
+		{
+		cout<< "Brak bazy danych"<<endl;
+			exit (0);
+		}
+		
+		string linia;
+		int nr_linii=1;
+		while (getline(plik, linia))
+		{
+			if(nr_linii)
+			{
+				if(
+					//sprawdzanie lini 1, potem przeskakuje o 5 lini, znow sprawdza az ta linia nie jest pusta
+		
+				 //ID=atoi(linia.c_str()); break;
+				//case 2: imie= linia; break;
+				//case 3: nazwisko= linia; break;
+				
+			}
+			
+			nr_linii +=5;
+		
+		}
+	plik.close();
+	}
 	
 
 };
+
 /*
 class Karnet{
     public:
