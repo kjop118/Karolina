@@ -137,37 +137,55 @@ int main()
     		int opcja5;
 			cout<<"*************** OSRODEK NARCIARSKI ***************"<<endl;
 			cout<<"***************** Wybierz opcje ******************"<<endl;
-			cout<<"**************** 1. Rejestracja ******************"<<endl;
-			cout<<"***************** 2. Kup Karnet ******************"<<endl;
-			cout<<"*************** 3. Przedluz karnet ***************"<<endl;
-			cout<<"*************** 4. Wypozycz sprzet ***************"<<endl;
-			cout<<"**************** 5. Sprawdz dane *****************"<<endl;
-
+			cout<<"***************** 1. Logowanie *******************"<<endl;
+			cout<<"**************** 2. Rejestracja ******************"<<endl;
 			cin>>opcja5;
 			switch(opcja5)
 			{
 				case 1:
-					//funkcja z rejestracją
+					//funkcja z logowaniem
+					//sprawdzanie w pliku czy jest taki narciarz
+					//sprawdzanie danych czy poprawnie wpisane
 					break;
-				case 2:
+					
+				case 2: 
+					//wprowazanie danych, tworzenie nowego obiektu
+					//zapis do pliku narciarza
+					break;
+				default:
+					
+					
+					
+			}
+			
+			cout<<"***************** 1. Kup Karnet ******************"<<endl;
+			cout<<"*************** 2. Przedluz karnet ***************"<<endl;
+			cout<<"*************** 3. Wypozycz sprzet ***************"<<endl;
+			cout<<"**************** 4. Sprawdz dane *****************"<<endl;
+			
+			//zapis do osobnego pliku narciarzy, sprawdzanie potem czy narciarz istnieje w pliku
+			//odczyt z pliku
+
+			cin>>opcja6;
+			switch(opcja6)
+			{
+				case 1:
 					//funkcja z kupnem karnetu
 					break;
-				case 3:
+				case 2:
 					//funkcja z przedluzeniem karnetu
 					break;
-				case 4:
+				case 3:
 					//funkcja z wypozyczeniem sprzetu
 					break;
-				case 5:
+				case 4:
 					//funkcja zwiazana ze sprawdzaniem danych
 					break;
+				
 				default:
 					break;
 			}
 	
-			break;
-	
-		default:
 			break;
 	}
 
