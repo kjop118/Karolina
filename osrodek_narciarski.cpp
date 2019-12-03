@@ -67,20 +67,26 @@ int main()
 
 			cin >> decyzja;
 
-			switch(decyzja)
+			if(decyzja=="tak")
 			{
-				case 'tak':
+				
 					//funkcja ze sprawdzaniem danych
 					break;
-				case 'nie':
+			}
+			else if(decyzja=="nie")
+			{
+				
 					//mozna sie cofnąc do wyboru osoby
 					//np. goto:
 					break;
-				default:
+			}
+			else
+			{
+				
 					break;
 			}
 
-			break;		
+			//break;		
 		case 2:
 			//tworzymy obiekt kasjerka
 
