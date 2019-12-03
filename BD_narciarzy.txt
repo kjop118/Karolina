@@ -1,0 +1,7 @@
+ID
+Imię
+Nazwisko
+Data_ur
+E-mail
+
+
