@@ -243,3 +243,5 @@ int main()
 
 	return 0:
 }
+
+//należy jeszcze poprawić ten odczyt z pliku bo to dalej nir działa
