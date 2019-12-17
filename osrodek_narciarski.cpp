@@ -45,7 +45,8 @@ class Logowanie{
 			if(nr_linii)
 			{
 				if(
-					//sprawdzanie lini 1, potem przeskakuje o 5 lini, znow sprawdza az ta linia nie jest pusta
+					//sprawdzanie lini 1, potem przeskakuje o 5 lini,
+					//znow sprawdza az ta linia nie jest pusta
 		
 				 //ID=atoi(linia.c_str()); break;
 				//case 2: imie= linia; break;
@@ -102,7 +103,7 @@ int main()
 	cout <<"Witamy w systemie obslugi osrodka narciarskiego!!!"<< endl;
 	cout <<"*************** Wybierz kim jesteś ***************"<< endl;
 	cout <<"****************** 1. Kierownik ******************"<< endl;
-	cout <<"******************** 2. Kasjer *******************"<< endl;
+	cout <<"****************** 2. Kasjer *********************"<< endl;
 	cout <<"************ 3. Obsluga wypozyczalni *************"<< endl;
 	cout <<"****************** 4. Narciarz *******************"<< endl;
 	
@@ -189,7 +190,7 @@ int main()
 			cout<<"*************** OSRODEK NARCIARSKI ***************"<<endl;
 			cout<<"***************** Wybierz opcje ******************"<<endl;
 			cout<<"***************** 1. Logowanie *******************"<<endl;
-			cout<<"**************** 2. Rejestracja ******************"<<endl;
+			cout<<"***************** 2. Rejestracja *****************"<<endl;
 			cin>>opcja5;
 			switch(opcja5)
 			{
@@ -209,10 +210,10 @@ int main()
 					
 			}
 			
-			cout<<"***************** 1. Kup Karnet ******************"<<endl;
-			cout<<"*************** 2. Przedluz karnet ***************"<<endl;
-			cout<<"*************** 3. Wypozycz sprzet ***************"<<endl;
-			cout<<"**************** 4. Sprawdz dane *****************"<<endl;
+			cout<<"****************1. Kup Karnet ********************"<<endl;
+			cout<<"****************2. Przedluz karnet ***************"<<endl;
+			cout<<"****************3. Wypozycz sprzet ***************"<<endl;
+			cout<<"****************4. Sprawdz dane ******************"<<endl;
 			
 			//zapis do osobnego pliku narciarzy, sprawdzanie potem czy narciarz istnieje w pliku
 			//odczyt z pliku
