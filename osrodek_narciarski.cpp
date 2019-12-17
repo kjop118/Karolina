@@ -69,7 +69,7 @@ class Karnet{
     string data_konca_karnetu;
     void kup_karnet();
     void pokaz_dane():
- } ;
+ };
 
 class Sprzet{
     public:
@@ -81,7 +81,7 @@ class Sprzet{
 
 class Dane{
     string sprawdzenie_danych():
- } ;
+ };
 
 class Rejestracja{
     public: 
