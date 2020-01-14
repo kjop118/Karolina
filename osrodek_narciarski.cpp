@@ -19,6 +19,54 @@ class Narciarz_farciarz
 	
 };
 
+class Buty_Narciarskie
+{	public:
+	string marka;
+	int cena;
+	int ilosc;
+	void aktualny_stan(int ilosc);
+};
+
+class Kijki
+{	public:
+	int cena;
+	int ilosc;
+	void aktualny_stan(int ilosc);
+};
+
+class Buty_Snowboardowe
+{
+	public:
+	int cena;
+	int rozmiar;
+	int ilosc;
+	void aktualny_stan(int ilosc, int rozmiar);
+};
+
+class Kask
+{
+	public:
+	int cena;
+	int rozmiar;
+	int ilosc;
+	void aktualny_stan(int ilosc, int rozmiar);
+};
+
+
+
+class Sprzet:public Buty_Narciarskie, public Kijki, public Buty_Snowboardowe, public Kask
+{
+	public:
+	string jaki_sprzet;
+	string data_rozp_wyp;
+	string data_konca_wyp;
+	//na razie void w pierwszej metodzie
+	void wypozyczenie(string jaki_sprzet){}
+	void oddawanie(string sprzet){}
+	void pokaz_stan(string stan){}
+	
+};
+
 class Logowanie{
 	void wprowadz_dane(string e_mail, string imie, string nazwisko)
 	{
