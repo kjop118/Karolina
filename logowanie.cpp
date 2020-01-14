@@ -37,7 +37,7 @@ class Logowanie
 		while (getline(plik, linia))
 		{   
             
-            int i = 0;
+           
 			if(nr_linii)
 			{
 				if(linia==e_mail)
@@ -46,7 +46,7 @@ class Logowanie
                     return 1;
                 }
 			}
-			nr_linii +=4;
+			nr_linii +=5;
 		}
         plik.close();
         cout<<endl<<"Nie ma takigo uzytkownika w systemie"<<endl;
