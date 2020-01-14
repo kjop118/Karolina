@@ -99,7 +99,7 @@ int main()
 	int opcja;
 
 	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
-	//goto:
+	wybor:
 	cout <<"Witamy w systemie obslugi osrodka narciarskiego!!!"<< endl;
 	cout <<"*************** Wybierz kim jesteś ***************"<< endl;
 	cout <<"****************** 1. Kierownik ******************"<< endl;
@@ -113,6 +113,8 @@ int main()
 	switch (opcja) 
 	{
 		case 1:
+			pytanie:
+			
 			//tworzymy obiekt kierowniczka
 			cout<<"************** Czy chcesz sprawdzić dane? (tak/nie) **************"<<endl;
 			string decyzja;
@@ -128,13 +130,14 @@ int main()
 			else if(decyzja=="nie")
 			{
 				
-					//mozna sie cofnąc do wyboru osoby
-					//np. goto:
+					//mozna sie cofnąc do wyboru osoby- ZROBIONE
+					goto wybor;
 					break;
 			}
 			else
-			{
-				
+			{		//powrot do pytania po wpisaniu zlej odp
+				cin>>"wpisana bledna odpowiedz">>endl;
+				goto pytanie;
 					break;
 			}
 
@@ -151,8 +154,33 @@ int main()
 			switch(opcja3)
 			{
 				case 1:
-					//funkcja sprawdzajaca dane
+					
+			cout<<"************** Czy chcesz sprawdzić dane? (tak/nie) **************"<<endl;
+			string decyzja1;
+
+			cin >> decyzja1;
+
+			if(decyzja1=="tak")
+			{
+				
+					//funkcja ze sprawdzaniem danych
 					break;
+			}
+			else if(decyzja1=="nie")
+			{
+				
+					//mozna sie cofnąc do wyboru osoby- ZROBIONE
+					goto wybor;
+					break;
+			}
+			else
+			{		//powrot do pytania po wpisaniu zlej odp
+				cin>>"wpisana bledna odpowiedz">>endl;
+				goto pytanie;
+					break;
+			}
+					
+					
 				case 2:
 					//funkcja zwiazana z obslugą karnetu
 					break;
@@ -161,6 +189,10 @@ int main()
 			}
 
 			break;
+			
+			
+			
+			
 
 		case 3:
 			//tworzymy obiekt obsluga wypozyczalni
@@ -185,6 +217,7 @@ int main()
 			break;
 		case 4:
 			//tworzymy obiekt narciarz
+
 		
     		int opcja5;
 			cout<<"*************** OSRODEK NARCIARSKI ***************"<<endl;
