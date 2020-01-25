@@ -1,0 +1,27 @@
+class platnosc
+{
+    int Realizuj(int kwota,bool rodzaj)
+    {
+        if(rodzaj)
+        {
+            int numer,PIN;
+            cout<<"Podaj numer karty."<<endl;
+            cin>>numer;
+            cout<<"Podaj PIN."<<endl;
+            cin>>PIN;
+            cout<<"Laczenie z bankiem..."<<endl;
+            sleep(1000);
+            cout<<"Akceptacja."<<endl;
+        }
+        else
+        {
+            cout<<"Obsluga kasy..."<<endl;
+            sleep(1000);
+            
+        }
+        
+        
+        
+    }
+    
+};
