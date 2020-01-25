@@ -1,0 +1,478 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <cstdlib>
+#include <algorithm>
+using namespace std;
+
+
+class Narciarz_farciarz
+{
+
+	protected:
+
+	string imie;
+	string nazwisko;
+	string data_ur;
+	string e_mail;
+
+
+};
+
+class Logowanie{
+    string e_mail;
+    string imie;
+    string nazwisko;
+    public:
+	void wprowadz_dane()
+	{
+		cout<<"Podaj e-mail: "; cin>>e_mail;
+		cout<<"Podaj imie: "; cin>>imie ;
+		cout<<"Podaj nazwisko: "; cin>>nazwisko ;
+	}
+
+	void sprawdzanie_BD()
+	{
+	//otwarcie pliku, sprawdzanie maila
+		fstream plik;
+		plik.open("BD_narciarzy.txt",ios::in);
+		if(plik.good()==false)
+		{
+		cout<< "Brak bazy danych"<<endl;
+			exit (0);
+		}
+
+		string linia;
+		int nr_linii=1;
+		while (getline(plik, linia))
+		{
+			if(nr_linii)
+			{
+				//if()
+					//sprawdzanie lini 1, potem przeskakuje o 5 lini,
+					//znow sprawdza az ta linia nie jest pusta
+
+				 //ID=atoi(linia.c_str()); break;
+				//case 2: imie= linia; break;
+				//case 3: nazwisko= linia; break;
+
+			}
+
+			nr_linii +=5;
+
+		}
+	plik.close();
+	}
+
+
+};
+class dane
+{
+
+    string e_mail;
+    string imie;
+    string nazwisko;
+    public:
+    void dane_karnet()
+    {
+
+
+    }
+	void wprowadz_dane()
+	{
+
+		cout<<"Podaj e-mail: "; cin>>e_mail;
+
+	}
+
+	int sprawdzanie_karnet()
+	{
+		fstream plik;
+		plik.open("BD_karnet.txt",ios::in);
+
+		if(plik.good()==false)
+		{
+		cout<< "Brak bazy danych"<<endl;
+			exit (0);
+		}
+        string karnet;
+		string linia;
+		int nr_linii=1;
+		while (getline(plik, linia))
+		{
+
+
+			if(nr_linii)
+			{
+				if(linia==e_mail)
+                {
+                    getline(plik, linia);
+                    karnet=linia;
+                    goto koniec_karnet;
+                }
+			}
+			nr_linii +=5;
+		}
+		cout<<endl<<"Nie ma takigo uzytkownika w systemie"<<endl;
+		return 0;
+		koniec_karnet:
+        cout<<karnet;
+        plik.close();
+
+        //cout<<"       Wprowadź poprawne dane       "<<endl;
+        return 0;
+
+	}
+
+	int sprawdzanie_sprzet()
+	{
+		fstream plik;
+		plik.open("BD_sprzet.txt",ios::in);
+
+		if(plik.good()==false)
+		{
+		cout<< "Brak bazy danych"<<endl;
+			exit (0);
+		}
+        string sprzet;
+		string linia;
+		int nr_linii=1;
+		while (getline(plik, linia))
+		{
+
+
+			if(nr_linii)
+			{
+				if(linia==e_mail)
+                {
+                    getline(plik, linia);
+                    sprzet=linia;
+                    goto koniec_sprzet;
+                }
+			}
+			nr_linii +=5;
+		}
+		cout<<endl<<"Nie ma takigo uzytkownika w systemie"<<endl;
+		return 0;
+		koniec_sprzet:
+        cout<<sprzet;
+        plik.close();
+
+        //cout<<"       Wprowadź poprawne dane       "<<endl;
+        return 0;
+
+	}
+};
+
+
+class Rejestracja
+{
+    public:
+    void wprowadz_dane(string imie, string nazwisko, string data_ur, string e_mail)
+    {
+        fstream plik;
+
+        plik.open("BD_narciarzy.txt",ios::out | ios::app);
+
+        plik<<imie<<endl;//1
+        plik<<nazwisko<<endl;//2
+        plik<<data_ur<<endl;//3
+        plik<<e_mail<<endl;//4
+        plik<<endl;//5
+        plik.close();
+    }
+    void pokaz_dane(string mail)
+    {
+        fstream plik;
+        plik.open("BD_narciarzy.txt",ios::in);
+        if(plik.good()==false)
+        {
+            cout<<"blad"<<endl;
+        }
+        else
+        {
+            string imie,nazwisko,data_ur,email;
+            string linia;
+            int nr_linii=1;
+            int id=0;
+            string szukany_email;
+            string szukany_imie;
+            string szukany_nazwisko;
+            string szukany_data_ur;
+
+            while(getline(plik,linia))
+            {
+
+                switch(nr_linii)
+                {
+                    case 1: imie=linia; break;
+                    case 2: nazwisko = linia;break;
+                    case 3: data_ur = linia;break;
+                    case 4: email= linia;break;
+                    case 5: break;
+
+
+                }
+                if (nr_linii==5)
+                {
+                    nr_linii=0;
+                    if(email==mail)
+                    {
+                        szukany_imie=imie;
+                        szukany_nazwisko=nazwisko;
+                        szukany_data_ur=data_ur;
+                        szukany_email=email;
+                    }
+                }
+
+                    nr_linii++;
+            }
+
+            plik.close();
+            cout<<szukany_imie<<" "<<szukany_nazwisko<<" "<<szukany_data_ur<<" "<<szukany_email<<endl;
+        }
+    }
+};
+
+/*
+class Karnet{
+    public:
+    string data_rozp_karnetu;
+    string data_konca_karnetu;
+    void kup_karnet();
+    void pokaz_dane():
+ };
+class Sprzet{
+    public:
+    string jaki_sprzet;
+    string data_rozp_wyp;
+    string data_konca_wyp;
+    void wypozyczenie();
+};
+class Dane{
+    string sprawdzenie_danych():
+ };
+class Rejestracja{
+    public:
+    void wprowadz_dane(string imie, string nazwisko, string data_ur, string e_mail){
+            string imie, nazwisko, data_ur, e_mail;
+            cout<<"rejestracja uzytkownika : "<<imie<<endl;
+             }
+    };
+*/
+
+int main()
+{
+    poczatek:
+	int opcja;
+	int opcja6;
+
+	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
+	//goto:
+	cout <<"Witamy w systemie obslugi osrodka narciarskiego!!!"<< endl;
+	cout <<"*************** Wybierz kim jesteś ***************"<< endl;
+	cout <<"****************** 1. Kierownik ******************"<< endl;
+	cout <<"****************** 2. Kasjer *********************"<< endl;
+	cout <<"************ 3. Obsluga wypozyczalni *************"<< endl;
+	cout <<"****************** 4. Narciarz *******************"<< endl;
+
+
+
+	cin >> opcja;
+	switch (opcja)
+	{
+		case 1:
+		    {
+
+
+			//tworzymy obiekt kierowniczka
+			cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
+			string decyzja;
+
+			cin >> decyzja;
+
+			if(decyzja=="sprzetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_sprzet();
+					break;
+			}
+			else if(decyzja=="karnetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_karnet();
+					break;
+			}
+			else
+			{
+                    goto poczatek;
+					break;
+			}
+		    }
+		    break;
+
+			//break;
+		case 2:
+		    {
+
+
+			//tworzymy obiekt kasjerka
+
+			int opcja3;
+			cout<<"*************** Wybierz opcje ***************"<< endl;
+			cout<<"************** 1. Sprawdz dane **************"<< endl;
+			cout<<"************ 2. Obsluga karnetu ************"<< endl;
+
+			cin>>opcja3;
+			switch(opcja3)
+			{
+				case 1:
+					{
+					    cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
+			string decyzja;
+
+			cin >> decyzja;
+
+			if(decyzja=="sprzetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_sprzet();
+					break;
+			}
+			else if(decyzja=="karnetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_karnet();
+					break;
+			}
+			else
+			{
+                    goto poczatek;
+					break;
+			}
+		    }
+
+					break;
+				case 2:
+					//funkcja zwiazana z obslugą karnetu
+					break;
+				default:
+					break;
+			}
+		    }
+			break;
+
+		case 3:
+		    {
+
+
+			//tworzymy obiekt obsluga wypozyczalni
+			cout<<"***************** Wybierz opcje ******************"<<endl;
+			cout<<"************ 1. Wypozyczenie sprzetu *************"<<endl;
+			cout<<"******** 2. Stan sprzetu w wypozyczalnii *********"<<endl;
+
+			int opcja4;
+			cin>>opcja4;
+			switch(opcja4)
+			{
+				case 1:
+					//funkcja zwiazana z wypozyczeniem sprzetu
+					break;
+				case 2:
+					//funkcja zwiazana z wyswietleniem stanu sprzetu
+					break;
+				default:
+					break;
+			}
+		    }
+			break;
+		case 4:
+			//tworzymy obiekt narciarz
+			{
+
+
+
+    		int opcja5;
+			cout<<"*************** OSRODEK NARCIARSKI ***************"<<endl;
+			cout<<"***************** Wybierz opcje ******************"<<endl;
+			cout<<"***************** 1. Logowanie *******************"<<endl;
+			cout<<"***************** 2. Rejestracja *****************"<<endl;
+			cin>>opcja5;
+			switch(opcja5)
+			{
+				case 1:
+				    {
+				        Logowanie logowanie;
+					logowanie.wprowadz_dane();
+					logowanie.sprawdzanie_BD();
+				    }
+
+
+					break;
+
+				case 2:
+				    {
+				        Rejestracja rejestracja;
+				        string imie,nazwisko,email,data;
+				        cin>>imie;
+				        cin>>nazwisko;
+				        cin>>email;
+				        cin>>data;
+				        rejestracja.wprowadz_dane(imie,nazwisko,data,email);
+				    }
+
+					break;
+				default:
+                    break;
+
+
+			}
+			}
+
+			cout<<"****************1. Kup Karnet ********************"<<endl;
+			cout<<"****************2. Przedluz karnet ***************"<<endl;
+			cout<<"****************3. Wypozycz sprzet ***************"<<endl;
+			cout<<"****************4. Sprawdz dane ******************"<<endl;
+
+			//zapis do osobnego pliku narciarzy, sprawdzanie potem czy narciarz istnieje w pliku
+			//odczyt z pliku
+
+			cin>>opcja6;
+			switch(opcja6)
+			{
+				case 1:
+					//funkcja z kupnem karnetu
+					break;
+				case 2:
+					//funkcja z przedluzeniem karnetu
+					break;
+				case 3:
+					//funkcja z wypozyczeniem sprzetu
+					break;
+				case 4:
+					{
+					    Rejestracja rejestracja;
+					    string mail;
+					    cout<<"podaj swoj mail"<<endl;
+					    cin>>mail;
+					    rejestracja.pokaz_dane(mail);
+					}
+					break;
+
+				default:
+					break;
+			}
+
+			break;
+	}
+
+	return 0;
+}
