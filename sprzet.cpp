@@ -150,6 +150,7 @@ class Sprzet{
 
 		void wypozyczenie()
 		{
+			wypozycz;
 			cout<<endl<<"******* JAKI SPRZĘT CHCESZ WYPOŻYCZYĆ ? *******"<<endl;
 			cout<<"****************** 1. Narty *******************"<<endl;
 			cout<<"**************** 2. Snowboard *****************"<<endl;
@@ -189,13 +190,14 @@ class Sprzet{
 			else
 			{
 				cout<<"Nie ma takiej opcji !!!"<<endl;
-				//mozna zrobic go to do menue wyboru
+				goto wypozycz;
 			}
 
 		}
 
 		void oddawanie()
 		{
+			oddaj:
 			cout<<endl<<"********* JAKI SPRZĘT CHCESZ ODDAĆ ? **********"<<endl;
 			cout<<"****************** 1. Narty *******************"<<endl;
 			cout<<"**************** 2. Snowboard *****************"<<endl;
@@ -242,7 +244,7 @@ class Sprzet{
 			else
 			{
 				cout<<"Nie ma takiej opcji !!!"<<endl;
-				//mozna zrobic go to do menue wyboru
+				goto oddaj;
 			}
 		}		
 };
@@ -267,7 +269,5 @@ int main()
 		default: break;
 	}
 	
-
-
 	return 0;
 }
