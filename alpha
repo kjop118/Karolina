@@ -85,6 +85,7 @@ class dane
 
 	}
 
+
 	int sprawdzanie_karnet()
 	{
 		fstream plik;
@@ -161,6 +162,37 @@ class dane
         //cout<<"       Wprowadź poprawne dane       "<<endl;
         return 0;
 
+	}
+
+	int sprawdzenie_danych()
+	{
+	    cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
+			string decyzja;
+
+			cin >> decyzja;
+
+			if(decyzja=="sprzetowe")
+			{
+
+
+					wprowadz_dane();
+					sprawdzanie_sprzet();
+
+			}
+			else if(decyzja=="karnetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_karnet();
+
+			}
+			else
+			{
+                    return 1;
+
+			}
+			return 0;
 	}
 };
 
@@ -285,33 +317,8 @@ int main()
 		    {
 
 
-			//tworzymy obiekt kierowniczka
-			cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
-			string decyzja;
-
-			cin >> decyzja;
-
-			if(decyzja=="sprzetowe")
-			{
-
-					dane a;
-					a.wprowadz_dane();
-					a.sprawdzanie_sprzet();
-					break;
-			}
-			else if(decyzja=="karnetowe")
-			{
-
-					dane a;
-					a.wprowadz_dane();
-					a.sprawdzanie_karnet();
-					break;
-			}
-			else
-			{
-                    goto poczatek;
-					break;
-			}
+                        dane a;
+					    if(a.sprawdzenie_danych())goto poczatek;
 		    }
 		    break;
 
@@ -332,32 +339,8 @@ int main()
 			{
 				case 1:
 					{
-					    cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
-			string decyzja;
-
-			cin >> decyzja;
-
-			if(decyzja=="sprzetowe")
-			{
-
-					dane a;
-					a.wprowadz_dane();
-					a.sprawdzanie_sprzet();
-					break;
-			}
-			else if(decyzja=="karnetowe")
-			{
-
-					dane a;
-					a.wprowadz_dane();
-					a.sprawdzanie_karnet();
-					break;
-			}
-			else
-			{
-                    goto poczatek;
-					break;
-			}
+					    dane a;
+					    if(a.sprawdzenie_danych())goto poczatek;
 		    }
 
 					break;
@@ -476,3 +459,5 @@ int main()
 
 	return 0;
 }
+
+
