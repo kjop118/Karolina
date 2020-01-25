@@ -2,15 +2,21 @@ class dane
 {
 
     string e_mail;
-    
+    string imie;
+    string nazwisko;
     public:
-   
+    void dane_karnet()
+    {
+
+
+    }
 	void wprowadz_dane()
 	{
 
 		cout<<"Podaj e-mail: "; cin>>e_mail;
 
 	}
+
 
 	int sprawdzanie_karnet()
 	{
@@ -88,5 +94,36 @@ class dane
         //cout<<"       Wprowadź poprawne dane       "<<endl;
         return 0;
 
+	}
+
+	int sprawdzenie_danych()
+	{
+	    cout<<"**************  Ktore dane chcesz sprawdzic ? (sprzetowe/karnetowe) **************"<<endl;
+			string decyzja;
+
+			cin >> decyzja;
+
+			if(decyzja=="sprzetowe")
+			{
+
+
+					wprowadz_dane();
+					sprawdzanie_sprzet();
+
+			}
+			else if(decyzja=="karnetowe")
+			{
+
+					dane a;
+					a.wprowadz_dane();
+					a.sprawdzanie_karnet();
+
+			}
+			else
+			{
+                    return 1;
+
+			}
+			return 0;
 	}
 };
