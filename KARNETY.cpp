@@ -107,12 +107,19 @@ string rodzaj_karnetu;
         plik.close();
 
 
-    // potw wyboru
+ 
+        
+	
+	// potw wyboru
 			if( rodzaj_karnetu == "zjazdowy")
 			{ 
       Zjazdowy z1;
       z1.ilosc_zjazdow=10;
       cout<<" Karnet zjazdowy zostal zakupiony! Posiadasz: "<<z1.ilosc_zjazdow<<" zjazdów"<<endl;
+      int stawka=5;
+        int cena;
+        cena= stawka* z1.ilosc_zjazdow;
+        cout<<"Do zaplacenia  "<<cena<<endl;
 			}
 
 			else if( rodzaj_karnetu == "godzinny")
@@ -126,6 +133,10 @@ string rodzaj_karnetu;
         cout<<" Karnet godzinny zostal zakupiony!"<<endl;
         cout<<"Czas trwania karnetu: "<< g1.czas<<" godziny"<<endl;
         cout<<"Karnet ważny od godziny: "<<g1.dane_od<<" do godziny: "<< g1.dane_do<<endl;
+        int stawka=10;
+        int cena;
+        cena= stawka* g1.czas;
+        cout<<"Do zaplacenia  "<<cena<<endl;
         
 			}
 			else if( rodzaj_karnetu == "calodniowy")
@@ -137,6 +148,10 @@ string rodzaj_karnetu;
         cout<<" Karnet całodniowy zostal zakupiony!"<<endl;
         cout<<"Karnet ważny od godziny : "<<c1.dane_od<<" do godziny: "<<c1.dane_do<<endl; 
         cout<<"Czyli ważny przez: "<<c1.czas<<" godzin."<<endl;
+        int stawka=10;
+        int cena;
+        cena= stawka* c1.czas;
+        cout<<"Do zaplacenia  "<<cena<<endl;
 			}
 			else if( rodzaj_karnetu == "nocny")
 			{
@@ -147,6 +162,10 @@ string rodzaj_karnetu;
         n1.dane_do=23;
         cout<<"Karnet ważny od godziny : "<<n1.dane_od<<" do godziny: "<<n1.dane_do<<endl; 
         cout<<"Czyli ważny przez: "<<n1.czas<<" godziny."<<endl;
+        int stawka=10;
+        int cena;
+        cena= stawka* n1.czas;
+        cout<<"Do zaplacenia"<<cena<<endl;
 			}
 			else if( rodzaj_karnetu == "popoludniowy")
 			{
@@ -157,6 +176,11 @@ string rodzaj_karnetu;
         p1.dane_do=18;
         cout<<"Karnet ważny od godziny : "<<p1.dane_od<<" do godziny: "<<p1.dane_do<<endl; 
         cout<<"Czyli ważny przez: "<<p1.czas<<" godzin."<<endl;
+        
+        int stawka=10;
+        int cena;
+        cena= stawka* p1.czas;
+        cout<<"Do zaplacenia"<<cena<<endl;
 			}
 			else if( rodzaj_karnetu == "dzienny")
 			{
@@ -167,11 +191,14 @@ string rodzaj_karnetu;
         d1.dane_do=18;
         cout<<"Karnet ważny od godziny : "<<d1.dane_od<<" do godziny: "<<d1.dane_do<<endl; 
         cout<<"Czyli ważny przez: "<<d1.czas<<" godzin."<<endl;
+        int stawka=10;
+        int cena;
+        cena= stawka* d1.czas;
+        cout<<"Do zaplacenia"<<cena<<endl;
+
 			}
 
   }
-
-
 
 void pokaz_dane(); //z innego pliku
 
