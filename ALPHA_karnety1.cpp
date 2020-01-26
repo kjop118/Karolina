@@ -112,7 +112,7 @@ class dane
 			}
 			nr_linii +=5;
 		}
-		cout<<endl<<"Nie ma takigo uzytkownika w systemie"<<endl;
+		cout<<endl<<"Uzytkownik nie posiada karnetu."<<endl;
 		return 0;
 		koniec_karnet:
         cout<<karnet;
@@ -151,7 +151,7 @@ class dane
 			}
 			nr_linii +=5;
 		}
-		cout<<endl<<"Nie ma takigo uzytkownika w systemie"<<endl;
+		cout<<endl<<"Uzytkownik nie wypożyczyl sprzetu."<<endl;
 		return 0;
 		koniec_sprzet:
         cout<<sprzet;
