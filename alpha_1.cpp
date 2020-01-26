@@ -387,7 +387,7 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
         cout<<"Wprowadz swoj wybor: "; cin>>rodzaj_karnetu; 
 
         fstream plik;
-		plik.open("BD_karnet.txt",ios::out); 
+		plik.open("BD_karnet.txt",ios::out | ios::app); 
 
 		  if(plik.good()==false)
 		  {
@@ -493,8 +493,37 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
 		}
     }
 
-    void pokaz_dane(){};
+	
+    void sprawdz_karnet()
+{
+  //odczyt danych
+  fstream plik;
+  plik.open("BD_karnet.txt", ios::in );
 
+  if(plik.good()==false)
+    {
+      cout<<"plik nie istnieje";
+    }
+    string linia;
+    int nr_linii=1;
+    while(getline(plik,linia))
+    {
+      switch(nr_linii)
+      {
+          case 1: e_mail= linia; cout<<e_mail<<endl;  break;
+          case 2: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl;  break;
+         case 3: e_mail= linia; cout<<e_mail<<endl; break;
+          case 4: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
+          case 5: e_mail= linia; cout<<e_mail<<endl; break;
+          case 6: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
+          case 7: e_mail= linia; cout<<e_mail<<endl; break;
+          case 8: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
+      }
+     nr_linii++; 
+    }
+    plik.close();
+}
+    
 };
 
 
@@ -1124,7 +1153,7 @@ int main()
 		    }
 
 					break;
-				case 2:
+				case 2: a.sprawdz_karnet();
 					//funkcja zwiazana z obslugą karnetu
 					break;
 				default: goto wybierz; break;
