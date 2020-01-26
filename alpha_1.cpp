@@ -367,12 +367,12 @@ class Przedluz_waznosc
   {
     //na stale przedluza o 6h
     int czas = 6;
-    cout<<"Karnet zostal przedluzony o "<<czas<< "godzin"<<endl;  //tu wypierdala blad a nie powinno
+    cout<<"Karnet zostal przedluzony o "<<czas<< "godzin"<<endl;  
     return czas ;  
   }
 };
 
-class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public platnosc // 
+class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public platnosc  
 {
     public:
     string data_rozp_karnetu;
@@ -496,7 +496,7 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
 	
     void sprawdz_karnet()
 {
-  //odczyt danych
+  
   fstream plik;
   plik.open("BD_karnet.txt", ios::in );
 
