@@ -52,22 +52,12 @@ class Czasowy: public Dzienny, public Popoludniowy, public Nocny, public Calodni
 {
     public:
      
-    int czas_trwania_godziny(int dane_od, int dane_do)
-    {
-      int czas;
-      czas= dane_do - dane_od;
-      cout<<czas;
-      return czas;
-    }
+    int dane_od;
+    int dane_do;
   
 };
 
 
-class Rodzaj_karnetu: public Zjazdowy, public Czasowy
-{
- public:
- string rodzaj_karnetu;
-};
 
 
 class Przedluz_waznosc
@@ -84,13 +74,13 @@ class Przedluz_waznosc
 };
 
 
-class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc  //public Platnosc bo jest w innym pliku
+class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc  //public Platnosc bo jest w innym pliku
 {
   public:
   string data_rozp_karnetu;
   string data_konca_karnetu;
   string e_mail;
-
+string rodzaj_karnetu;
   void kup_karnet()
   {
     cout<<"Wpisz e-mail i wybierz rodzaj karnetu."<<endl;
