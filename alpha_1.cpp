@@ -277,6 +277,30 @@ class Rejestracja
     }
 };
 
+class platnosc
+{
+    int Realizuj(int kwota,bool rodzaj)
+    {
+        if(rodzaj)
+        {
+            int numer,PIN;
+            cout<<"Podaj numer karty."<<endl;
+            cin>>numer;
+            cout<<"Podaj PIN."<<endl;
+            cin>>PIN;
+            cout<<"Laczenie z bankiem..."<<endl;
+            //sleep(1000);
+            cout<<"Akceptacja."<<endl;
+        }
+        else
+        {
+            cout<<"Obsluga kasy..."<<endl;
+            //sleep(1000);          
+        }    
+		return 0;
+    }   
+};
+
 
 /////////////////////// KLASY DLA SEKCJI KARNET ///////////
 
@@ -348,7 +372,7 @@ class Przedluz_waznosc
   }
 };
 
-class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public Platnosc // 
+class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public platnosc // 
 {
     public:
     string data_rozp_karnetu;
