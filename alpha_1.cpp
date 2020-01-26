@@ -329,22 +329,11 @@ class Zjazdowy
 class Czasowy: public Dzienny, public Popoludniowy, public Nocny, public Calodniowy, public Godzinny
 {
     public:
-
-    int czas_trwania_godziny(int dane_od, int dane_do)
-    {
-        int czas;
-        czas= dane_do - dane_od;
-        cout<<czas;
-        return czas;
-    }
+	int dane_od;
+	int dane_do;
 
 };
 
-class Rodzaj_karnetu: public Zjazdowy, public Czasowy 
-{
-    public:
-    string rodzaj_karnetu;
-};
 
 
 class Przedluz_waznosc
@@ -359,13 +348,13 @@ class Przedluz_waznosc
   }
 };
 
-class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc 
+class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public Platnosc // 
 {
     public:
     string data_rozp_karnetu;
     string data_konca_karnetu;
     string e_mail;
-
+    string rodzaj_karnetu;
     void kup_karnet()
     {
         cout<<"Podaj e-mail: "; cin >> e_mail;
@@ -393,6 +382,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
             z1.ilosc_zjazdow=10;
       
             cout<<"Karnet zjazdowy zostal zakupiony! Posiadasz: "<<z1.ilosc_zjazdow<<" zjazdów"<<endl;
+		int stawka=5;
+     		 int cena;
+     		   cena= stawka* z1.ilosc_zjazdow;
+      		  cout<<"Do zaplacenia  "<<cena<<endl;
 		}
         else if( rodzaj_karnetu == "godzinny")
 		{
@@ -408,6 +401,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
             cout<<"Karnet godzinny zostal zakupiony!"<<endl;
             cout<<"Czas trwania karnetu: "<< g1.czas<<" godziny"<<endl;
             cout<<"Karnet ważny od godziny: "<<g1.dane_od<<" do godziny: "<< g1.dane_do<<endl;
+		int stawka=10;
+       		 int cena;
+    		   cena= stawka* g1.czas;
+    	     cout<<"Do zaplacenia  "<<cena<<endl;
         }
 		else if( rodzaj_karnetu == "calodniowy")
 		{
@@ -419,6 +416,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
             cout<<"Karnet całodniowy zostal zakupiony!"<<endl;
             cout<<"Karnet ważny od godziny: "<<c1.dane_od<<" do godziny: "<<c1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<c1.czas<<" godzin."<<endl;
+			int stawka=10;
+      	 	 int cena;
+       		 cena= stawka* c1.czas;
+       	 cout<<"Do zaplacenia  "<<cena<<endl;	
 		}
 		else if( rodzaj_karnetu == "nocny")
 		{
@@ -429,6 +430,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
             n1.dane_do=23;
             cout<<"Karnet ważny od godziny : "<<n1.dane_od<<" do godziny: "<<n1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<n1.czas<<" godziny."<<endl;
+			int stawka=10;
+        int cena;
+        cena= stawka* n1.czas;
+        cout<<"Do zaplacenia"<<cena<<endl;
 		}
 		else if( rodzaj_karnetu == "popoludniowy")
 		{
@@ -441,6 +446,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
 
             cout<<"Karnet ważny od godziny : "<<p1.dane_od<<" do godziny: "<<p1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<p1.czas<<" godzin."<<endl;
+			int stawka=10;
+       			 int cena;
+      			  cena= stawka* p1.czas;
+      			  cout<<"Do zaplacenia"<<cena<<endl;	
 		}
 		else if( rodzaj_karnetu == "dzienny")
 		{
@@ -453,6 +462,10 @@ class Karnet: public Rodzaj_karnetu, public Przedluz_waznosc
 
             cout<<"Karnet ważny od godziny : "<<d1.dane_od<<" do godziny: "<<d1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<d1.czas<<" godzin."<<endl;
+			int stawka=10;
+        int cena;
+        cena= stawka* d1.czas;
+        cout<<"Do zaplacenia"<<cena<<endl;
 		}
     }
 
