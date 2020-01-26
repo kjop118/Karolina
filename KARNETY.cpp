@@ -74,7 +74,7 @@ class Przedluz_waznosc
 };
 
 
-class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc  //public Platnosc bo jest w innym pliku
+class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc,public Platnosc //bo jest w innym pliku
 {
   public:
   string data_rozp_karnetu;
