@@ -24,11 +24,6 @@ class Narciarz_farciarz
 	}
 };
 
-class Kierownik
-{
-
-};
-
 class Kasjer
 {
 	public:
@@ -206,6 +201,15 @@ class dane
 	}
 };
 
+class Kierownik
+{
+	public:
+	void sprawdzam()
+	{
+		dane a;
+		a.sprawdzenie_danych();
+	}
+};
 
 class Rejestracja
 {
@@ -786,9 +790,7 @@ class Snowboard
 			plik<<tab[5]<<endl;
 
 			plik.close();
-		}
-		
-		
+		}	
 		return ilosc;
 	}
 
@@ -1234,9 +1236,9 @@ int main()
 	{
 		case 1:
 		{
-            dane a;
-		    if(a.sprawdzenie_danych())
-			goto poczatek;
+            Kierownik kierownik;
+			kierownik.sprawdzam();
+			cout<<endl<<"            DANE SPRAWDZONE. CZAS NA PRZERWE !!!         "<<endl;
 		}
 		    break;
 		case 2:
