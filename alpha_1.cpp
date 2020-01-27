@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <algorithm>
 using namespace std;
-
+#define ROZMIAR 10000
 
 class Narciarz_farciarz
 {   
@@ -24,11 +24,6 @@ class Narciarz_farciarz
 	}
 };
 
-class Obsluga_wypozyczalni
-{
-    
-};
-
 class Kierownik
 {
 
@@ -36,7 +31,14 @@ class Kierownik
 
 class Kasjer
 {
-
+	public:
+	void potwierdzenie(int kwota)
+	{
+		cout<<endl<<"Potwierdzam otrzymanie platnosci na kwote "<<kwota<<" zl"<<endl;
+		cout<<"Wystawianie paragonu ..."<<endl;
+		cout<<"Prosze czekać ... ... ..."<<endl;
+		cout<<"Paragon wydrukowany. Dziekujemy za cierpliwosc"<<endl;
+	}
 };
 
 class Logowanie
@@ -105,7 +107,6 @@ class dane
 		cout<<"Podaj e-mail uzytkownika: "; cin>>e_mail;
 	}
 
-
 	int sprawdzanie_karnet()
 	{
 		fstream plik;
@@ -121,8 +122,6 @@ class dane
 		int nr_linii=1;
 		while (getline(plik, linia))
 		{
-
-
 			if(nr_linii)
 			{
 				if(linia==e_mail)
@@ -279,10 +278,17 @@ class Rejestracja
 
 class platnosc
 {
-    int Realizuj(int kwota,bool rodzaj)
+	public:
+    int Realizuj(int kwota)
     {
-        if(rodzaj)
+		plac:
+		string rodzaj;
+		cout<<endl<<"Wybierz sposob platnosci (karta/gotowka)"<<endl;
+		cout<<"Wprowadz swoj wybor: "; cin>>rodzaj;
+
+        if(rodzaj == "karta")
         {
+			cout<<"Do zapłaty: "<<kwota<<"zl"<<endl;
             int numer,PIN;
             cout<<"Podaj numer karty."<<endl;
             cin>>numer;
@@ -292,13 +298,21 @@ class platnosc
             //sleep(1000);
             cout<<"Akceptacja."<<endl;
         }
-        else
+        else if(rodzaj == "gotowka")
         {
+			cout<<"Do zapłaty: "<<kwota<<"zl"<<endl;
             cout<<"Obsluga kasy..."<<endl;
             //sleep(1000);          
-        }    
+        } 
+		else
+		{
+			cout<<"Nie ma takiego wyboru"<<endl;
+			goto plac;
+		}
+		 
 		return 0;
     }   
+
 };
 
 
@@ -367,9 +381,11 @@ class Przedluz_waznosc
   {
     //na stale przedluza o 6h
     int czas = 6;
-    cout<<"Karnet zostal przedluzony o "<<czas<< "godzin"<<endl;  
+    cout<<endl<<"Karnet zostal przedluzony o "<<czas<< "godzin"<<endl;  
+	cout<<"            ZYCZYMY UDANJ ZABAWY !!!         "<<endl;
     return czas ;  
   }
+
 };
 
 class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public platnosc  
@@ -379,24 +395,33 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
     string data_konca_karnetu;
     string e_mail;
     string rodzaj_karnetu;
+	platnosc p;
+	Kasjer kasjer;
+
     void kup_karnet()
     {
         cout<<"Podaj e-mail: "; cin >> e_mail;
-        cout<<"Wybierz rodzaj karnetu czasowego:"<<endl;
-        cout<<"Godzinny,Całodniowy, Nocny, Popołudniowy, Dzienny" << endl;
+        cout<<endl<<"************ Wybierz rodzaj karnetu: **********"<<endl;
+		cout<<"******************* zjazdowy ******************"<<endl;
+		cout<<"******************* godzinny ******************"<<endl;
+		cout<<"****************** calodniowy *****************"<<endl;
+		cout<<"******************** nocny ********************"<<endl;
+		cout<<"****************** popolodniowy ***************"<<endl;
+		cout<<"******************** dzienny ******************"<<endl;
         cout<<"Wprowadz swoj wybor: "; cin>>rodzaj_karnetu; 
 
         fstream plik;
 		plik.open("BD_karnet.txt",ios::out | ios::app); 
 
-		  if(plik.good()==false)
-		  {
-		  cout<< "Brak bazy danych"<<endl;
+		if(plik.good()==false)
+		{
+			cout<< "Brak bazy danych"<<endl;
 			exit (0);
-		  }
+		}
 
-            plik<<e_mail<<endl;
-            plik<<rodzaj_karnetu<<endl;
+		plik<<e_mail<<endl;
+		plik<<rodzaj_karnetu<<endl;
+		plik<<endl;
     
         plik.close();
 
@@ -405,30 +430,33 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
             Zjazdowy z1;
             z1.ilosc_zjazdow=10;
       
-            cout<<"Karnet zjazdowy zostal zakupiony! Posiadasz: "<<z1.ilosc_zjazdow<<" zjazdów"<<endl;
-		int stawka=5;
-     		 int cena;
-     		   cena= stawka* z1.ilosc_zjazdow;
-      		  cout<<"Do zaplacenia  "<<cena<<endl;
+            cout<<endl<<"Karnet zjazdowy zostal zakupiony! Posiadasz: "<<z1.ilosc_zjazdow<<" zjazdów"<<endl;
+			int stawka=5;
+     		int cena;
+     		cena= stawka* z1.ilosc_zjazdow;
+			p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);	
 		}
         else if( rodzaj_karnetu == "godzinny")
 		{
-            cout<<"Od której godziny wykupic karnet?"<<endl;
+            cout<<endl<<"Od której godziny wykupic karnet?"<<endl;
             Godzinny g1;
             cout<<"Wprowadz swoj wybor: "; cin>>g1.dane_od;
 
-			cout<<" Na ile godzin wykupić karnet?"<< endl;
+			cout<<endl<<" Na ile godzin wykupić karnet?"<< endl;
             cout<<"Wprowadz swoj wybor: "; cin>>g1.czas;
 
             g1.dane_do= g1.czas + g1.dane_od;
         
-            cout<<"Karnet godzinny zostal zakupiony!"<<endl;
+            cout<<endl<<"Karnet godzinny zostal zakupiony!"<<endl;
             cout<<"Czas trwania karnetu: "<< g1.czas<<" godziny"<<endl;
             cout<<"Karnet ważny od godziny: "<<g1.dane_od<<" do godziny: "<< g1.dane_do<<endl;
-		int stawka=10;
-       		 int cena;
-    		   cena= stawka* g1.czas;
-    	     cout<<"Do zaplacenia  "<<cena<<endl;
+		
+			int stawka=10;
+       		int cena;
+    		cena= stawka* g1.czas;
+    	    p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);
         }
 		else if( rodzaj_karnetu == "calodniowy")
 		{
@@ -437,31 +465,36 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
             c1.dane_od=9;
             c1.dane_do=21;
 
-            cout<<"Karnet całodniowy zostal zakupiony!"<<endl;
+            cout<<endl<<"Karnet całodniowy zostal zakupiony!"<<endl;
             cout<<"Karnet ważny od godziny: "<<c1.dane_od<<" do godziny: "<<c1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<c1.czas<<" godzin."<<endl;
+			
 			int stawka=10;
-      	 	 int cena;
-       		 cena= stawka* c1.czas;
-       	 cout<<"Do zaplacenia  "<<cena<<endl;	
+      	 	int cena;
+       		cena= stawka* c1.czas;
+			p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);
 		}
 		else if( rodzaj_karnetu == "nocny")
 		{
-            cout<<" Karnet nocny zostal zakupiony!"<<endl;
+            cout<<endl<<"Karnet nocny zostal zakupiony!"<<endl;
             Nocny n1;
             n1.czas=2;
             n1.dane_od=21;
             n1.dane_do=23;
+
             cout<<"Karnet ważny od godziny : "<<n1.dane_od<<" do godziny: "<<n1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<n1.czas<<" godziny."<<endl;
+			
 			int stawka=10;
-        int cena;
-        cena= stawka* n1.czas;
-        cout<<"Do zaplacenia"<<cena<<endl;
+        	int cena;
+        	cena= stawka* n1.czas;
+        	p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);
 		}
 		else if( rodzaj_karnetu == "popoludniowy")
 		{
-			cout<<" Karnet popołudniowy zostal zakupiony!"<<endl;
+			cout<<endl<<"Karnet popołudniowy zostal zakupiony!"<<endl;
 
             Popoludniowy p1;
         	p1.czas=6;
@@ -470,60 +503,98 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
 
             cout<<"Karnet ważny od godziny : "<<p1.dane_od<<" do godziny: "<<p1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<p1.czas<<" godzin."<<endl;
+			
 			int stawka=10;
-       			 int cena;
-      			  cena= stawka* p1.czas;
-      			  cout<<"Do zaplacenia"<<cena<<endl;	
+       		int cena;
+      		cena= stawka* p1.czas;
+			p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);
 		}
 		else if( rodzaj_karnetu == "dzienny")
 		{
-			cout<<" Karnet dzienny zostal zakupiony!"<<endl;
+			cout<<endl<<"Karnet dzienny zostal zakupiony!"<<endl;
             
             Dzienny d1;	
             d1.czas=9;
             d1.dane_od=9;
             d1.dane_do=18;
 
-            cout<<"Karnet ważny od godziny : "<<d1.dane_od<<" do godziny: "<<d1.dane_do<<endl; 
+            cout<<endl<<"Karnet ważny od godziny : "<<d1.dane_od<<" do godziny: "<<d1.dane_do<<endl; 
             cout<<"Czyli ważny przez: "<<d1.czas<<" godzin."<<endl;
+			
 			int stawka=10;
-        int cena;
-        cena= stawka* d1.czas;
-        cout<<"Do zaplacenia"<<cena<<endl;
+        	int cena;
+        	cena= stawka* d1.czas;
+			p.Realizuj(cena);
+			kasjer.potwierdzenie(cena);
 		}
+		cout<<endl<<"            ZYCZYMY UDANJ ZABAWY !!!         "<<endl;
     }
 
 	
     void sprawdz_karnet()
-{
-  
-  fstream plik;
-  plik.open("BD_karnet.txt", ios::in );
+	{
+		/*
+		string tab_mail[ROZMIAR];
+		string tab_sprzet[ROZMIAR], tab[ROZMIAR];
+		int i = 0;
+		string email, sprzet, pusto;
+		
 
-  if(plik.good()==false)
-    {
-      cout<<"plik nie istnieje";
-    }
-    string linia;
-    int nr_linii=1;
-    while(getline(plik,linia))
-    {
-      switch(nr_linii)
-      {
-          case 1: e_mail= linia; cout<<e_mail<<endl;  break;
-          case 2: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl;  break;
-         case 3: e_mail= linia; cout<<e_mail<<endl; break;
-          case 4: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
-          case 5: e_mail= linia; cout<<e_mail<<endl; break;
-          case 6: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
-          case 7: e_mail= linia; cout<<e_mail<<endl; break;
-          case 8: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
-      }
-     nr_linii++; 
-    }
-    plik.close();
-}
-    
+		fstream plik;
+		plik.open("BD_karnet.txt", ios::in );
+		if (!plik.good())
+		{
+			cout << "Blad pliku!" << endl;
+			return 0;
+		}
+		else 
+		{
+			while (!plik.eof()) 
+			{
+			plik >> email >> sprzet >> pusto;
+			email = tab_mail[i];
+			sprzet = tab_sprzet[i];
+			pusto = tab[i];
+			//tab_mail[i] = email;	cout<<tab_mail<<endl;
+			//tab_sprzet[i] = sprzet;		cout<<tab_sprzet<<endl;	
+			i++;	
+			cout<<email<<endl;
+			cout<<sprzet<<endl;	
+			//cout<<pusto<<endl;
+			}
+			return 0;
+		}
+		plik.close();
+		*/
+		
+  		fstream plik;
+  		plik.open("BD_karnet.txt", ios::in );
+
+		if(plik.good()==false)
+		{
+			cout<<"plik nie istnieje";
+		}
+		string linia;
+		int nr_linii=1;
+		while(getline(plik,linia))
+		{
+			switch(nr_linii)
+			{
+				case 1: e_mail= linia; cout<<e_mail<<endl;  break;
+				case 2: rodzaj_karnetu=linia; cout<<rodzaj_karnetu<<endl; break;
+				case 3: cout<<endl; break;
+				
+			}
+			if(nr_linii == 3)
+			{
+				nr_linii = 0;
+			}
+			nr_linii++; 
+		}
+		plik.close(); 
+		cout<<endl<<"            OPERACJA ZAKONCZONA !!!         "<<endl;
+	} 
 };
 
 
@@ -532,8 +603,8 @@ class Karnet: public Zjazdowy, public Czasowy, public Przedluz_waznosc, public p
 
 class Buty_Narciarskie
 {	
-	int cena;
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
 
@@ -597,8 +668,8 @@ class Buty_Narciarskie
 
 class Narty
 {
-	int cena;
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
 
@@ -660,8 +731,8 @@ class Narty
 
 class Snowboard
 {
-	int cena;
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
 
@@ -725,8 +796,8 @@ class Snowboard
 
 class Kijki
 {	
-	int cena;
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
 
@@ -789,12 +860,11 @@ class Kijki
 
 class Buty_Snowboardowe
 {
-	
-	int cena;
-
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
+	
     Buty_Snowboardowe()
     {
         cena = 30;
@@ -854,9 +924,8 @@ class Buty_Snowboardowe
 
 class Kask
 {
-	int cena;
-	//int rozmiar;
 	public:
+	int cena;
 	int ilosc;
 	int tab[6];
 
@@ -893,7 +962,7 @@ class Kask
 		
 		if(ilosc < 0)
 		{
-			cout<<"Brak Kaskow w magazynie"<<endl;
+			cout<<"Brak kaskow w magazynie"<<endl;
 			
 		}
 		else if (ilosc > 10)
@@ -927,7 +996,8 @@ class Sprzet
 	Buty_Snowboardowe bs1;
 	Kijki ki1;
 	Kask ka1;
-
+	platnosc p;
+	Kasjer kasjer;
 
 	void pokaz_stan()
 	{
@@ -956,7 +1026,7 @@ class Sprzet
 		}
 		plik.close();
 
-		cout<<endl<<"********** STAN SPRZETU W WYPORZCZLNI *********"<<endl;
+		cout<<endl<<"********** STAN SPRZETU W WYPOZYCZALNI *********"<<endl;
 		cout<<"Narty: "<<tab[0]<<" egzemplarzy"<<endl;
 		cout<<"Snowboard: "<<tab[1]<<" egzemplarzy"<<endl;
 		cout<<"Buty Narciarskie: "<<tab[2]<<" egzemplarzy"<<endl;
@@ -972,7 +1042,7 @@ class Sprzet
             string mail;
             fstream plik;
 
-            cout<<endl<<"Podaj swoj email: "; cin>>mail;
+            cout<<endl<<"Podaj email: "; cin>>mail;
 			wypozycz:
 			cout<<endl<<"******* JAKI SPRZĘT CHCESZ WYPOŻYCZYĆ ? *******"<<endl;
 			cout<<"****************** 1. Narty *******************"<<endl;
@@ -995,6 +1065,11 @@ class Sprzet
 			    plik<<mail<<endl;
 			    plik<<narty<<endl;
                 plik.close();
+			
+				//realizacja platnosci
+				p.Realizuj(n1.cena);
+				kasjer.potwierdzenie(n1.cena);
+
 			}
 			else if( wybor1 == 2)
 			{
@@ -1004,7 +1079,10 @@ class Sprzet
                 plik.open("BD_sprzet_uzytkownika.txt",ios::out | ios::app);
 			    plik<<mail<<endl;
 			    plik<<snowboard<<endl;
-                plik.close();	
+                plik.close();
+
+				p.Realizuj(s1.cena);
+				kasjer.potwierdzenie(s1.cena);	
 			}
 			else if( wybor1 == 3)
 			{
@@ -1014,7 +1092,10 @@ class Sprzet
                 plik.open("BD_sprzet_uzytkownika.txt",ios::out | ios::app);
 			    plik<<mail<<endl;
 			    plik<<buty1<<endl;
-                plik.close();			
+                plik.close();	
+
+				p.Realizuj(bn1.cena);
+				kasjer.potwierdzenie(bn1.cena);		
 			}
 			else if( wybor1 == 4)
 			{
@@ -1025,6 +1106,9 @@ class Sprzet
 			    plik<<mail<<endl;
 			    plik<<buty2<<endl;
                 plik.close();	
+
+				p.Realizuj(bs1.cena);
+				kasjer.potwierdzenie(bs1.cena);
 			}
 			else if( wybor1 == 5)
 			{
@@ -1034,7 +1118,10 @@ class Sprzet
                 plik.open("BD_sprzet_uzytkownika.txt",ios::out | ios::app);
 			    plik<<mail<<endl;
 			    plik<<kijki<<endl;
-                plik.close();		
+                plik.close();	
+
+				p.Realizuj(ki1.cena);
+				kasjer.potwierdzenie(ki1.cena);
 			}
 			else if( wybor1 == 6)
 			{
@@ -1044,13 +1131,17 @@ class Sprzet
                 plik.open("BD_sprzet_uzytkownika.txt",ios::out | ios::app);
 			    plik<<mail<<endl;
 			    plik<<kask<<endl;
-                plik.close();		
+                plik.close();	
+
+				p.Realizuj(ka1.cena);
+				kasjer.potwierdzenie(ka1.cena);	
 			}
 			else
 			{
 				cout<<"Nie ma takiej opcji !!!"<<endl;
 				goto wypozycz;
 			}
+			cout<<endl<<"            ZYCZYMY UDANJ ZABAWY !!!         "<<endl;
 
 		}
 
@@ -1105,7 +1196,21 @@ class Sprzet
 				cout<<"Nie ma takiej opcji !!!"<<endl;
 				goto oddaj;
 			}
+			cout<<endl<<"            DZIEKUJEMY. DO ZOBACZENIA !!!         "<<endl;
 		}		
+};
+
+
+class Obsluga_wypozyczalni
+{
+	public:
+	void wypozycz()
+	{
+		cout<<endl<<"Komu chcesz wypozyczyc sprzet"<<endl;
+		Sprzet sprzet;
+		sprzet.wypozyczenie();
+	}
+    
 };
 
 //////////////// GLOWNY PROGRAM ////////////////
@@ -1116,7 +1221,7 @@ int main()
 	cout <<endl<<"Witamy w systemie obslugi osrodka narciarskiego!!!"<< endl;
 	cout <<"*************** Wybierz kim jesteś ***************"<< endl;
 	cout <<"****************** 1. Kierownik ******************"<< endl;
-	cout <<"****************** 2. Kasjer *********************"<< endl;
+	cout <<"******************** 2. Kasjer *******************"<< endl;
 	cout <<"************ 3. Obsluga wypozyczalni *************"<< endl;
 	cout <<"****************** 4. Narciarz *******************"<< endl;
 
@@ -1147,15 +1252,12 @@ int main()
 			switch(opcja3)
 			{
 				case 1:
-					{
-					    dane a;
-					    if(a.sprawdzenie_danych()) goto poczatek;
-		    }
-
+				{
+					dane a;
+					if(a.sprawdzenie_danych()) goto poczatek;
+		    	}
 					break;
-				case 2: a.sprawdz_karnet();
-					//funkcja zwiazana z obslugą karnetu
-					break;
+				case 2: cout<<endl; a.sprawdz_karnet(); break;
 				default: goto wybierz; break;
 			}
 		    }
@@ -1163,6 +1265,7 @@ int main()
 
 		case 3:
 		{   
+			Obsluga_wypozyczalni ow;
             wybierz1:
 			cout<<endl<<"***************** Wybierz opcje ******************"<<endl;
 			cout<<"************ 1. Wypozyczenie sprzetu *************"<<endl;
@@ -1174,7 +1277,7 @@ int main()
 				switch(opcja4)
 				{	
 					case 1:
-						s1.wypozyczenie();
+						ow.wypozycz();
 						break;
 					case 2:
 						s1.pokaz_stan();
