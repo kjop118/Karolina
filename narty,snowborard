@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+
+class narty
+{
+public:
+    int cena;
+    int ilosc;
+    void aktualny_stan(int ilosc);
+};
+class snowboard
+{
+    public:
+    int cena;
+    int ilosc;
+    void aktualny_stan(int ilosc);
+};
